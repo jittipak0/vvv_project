@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+:root {
+  /* สีหลัก (Primary Color) */
+  --color_primary: #484bd7;
+  --color_primary_hover: #2f318b;
+
+  /* สีรอง (Secondary Color) */
+  --color_secondary: #ff4081;
+  --color_secondary_hover: #c60055;
+
+  /* สีพื้นหลังและข้อความ */
+  --color_background: #f5f5f5;
+  --color_text: #333;
+  --color_text_light: #555;
+  --color_bg_text_box: #fdf9b4;
+  --color_arrow: #a73b24;
+
+  --font_primary: "Bai Jamjuree", serif;
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font_primary);
+  font-weight: 500;
+  background-color: var(--color_background);
+  color: var(--color_text);
+  /* overflow: hidden; */
+}
+
+a {
+  color: var(--color_primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--color_primary_hover);
+}
+
+.nav_box {
+  display: flex;
+  position: absolute;
+  border-radius: 50%;
+  margin: 15px;
+  box-shadow: 2px 4px 3px rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.nav_box:hover {
+  background-color: #000;
+}
+
+.vdo_box {
+  width: 45vw;
+  left: 3%;
+  top: 28vh;
+  padding: 10px;
+  background-color: #fff;
+}
+
+.text_box {
+  background-color: var(--color_bg_text_box);
+  height: fit-content;
+  box-shadow: 2px 4px 3px rgba(0, 0, 0, 0.4);
+  padding: 2rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
