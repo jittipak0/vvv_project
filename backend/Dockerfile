@@ -1,7 +1,7 @@
 # backend/Dockerfile
 
 # เลือกใช้ official Go image เป็นขั้นตอนแรก
-FROM golang:1.23.4-alpine AS builder
+FROM golang:latest AS builder
 
 # ตั้งค่าตัวแปร environment
 ENV GO111MODULE=on \
