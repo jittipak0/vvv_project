@@ -12,7 +12,6 @@ interface FullscreenImageProps {
   hideEdit?: boolean;
   notActive?: boolean;
   pendingUploads?: { [key: string]: File };
-  // contentKey?: string;
 }
 
 const FullscreenImage: React.FC<FullscreenImageProps> = ({
@@ -20,8 +19,6 @@ const FullscreenImage: React.FC<FullscreenImageProps> = ({
   contents,
   hideEdit,
   notActive,
-  // pendingUploads,
-  // contentKey,
 }) => {
   const [src, setSrc] = useState<string>(contents.value);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -130,7 +127,6 @@ const FullscreenImage: React.FC<FullscreenImageProps> = ({
         setSrc(newImageUrl);
       }
       await updateContentFields(contents.id, data);
-      // alert("Image uploaded successfully!");
     } catch (error) {
       console.error("Failed to upload image:", error);
       alert("Failed to upload image.");

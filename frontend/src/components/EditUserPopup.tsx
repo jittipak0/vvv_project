@@ -22,9 +22,6 @@ const EditUserPopup: React.FC<EditUserPopupProps> = ({
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  //   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //     setFormData({ ...formData, [e.target.name]: e.target.value });
-  //   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     let newValue = value;
@@ -94,7 +91,7 @@ const EditUserPopup: React.FC<EditUserPopupProps> = ({
       await delUserByID(formData.id);
       alert("User deleted successfully!");
       onClose();
-      onDelete(); 
+      onDelete();
     } catch {
       setError("Failed to delete user.");
       alert("Failed to delete user.");

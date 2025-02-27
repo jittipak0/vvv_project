@@ -201,31 +201,32 @@ const EditContent = () => {
     );
   };
 
-  // บันทึกการเปลี่ยนแปลงทั้งหมด
   const handleSave = async () => {
     if (!pageData) return;
     setLoading(true);
     try {
-      // ทำ deep clone ของ pageData เพื่อให้เราแก้ไขสำเนาโดยไม่กระทบ state เดิม
       const updatedPageData = structuredClone(pageData);
 
-      // Update title_ref ของทุก content ในทุกกลุ่ม
       updatedPageData.groups.forEach((group) => {
         group.contents.forEach((content) => {
-          // หาก ref ไม่ถูกตั้งค่า ให้กำหนด title_ref เป็น array ว่าง
-          if (!content.ref) content.title_ref = [];
-          // ถ้า title_ref ในตำแหน่งนั้นเป็นค่าว่าง และมีค่าใน ref ให้แทนที่ด้วยค่าใน ref
-          content.title_ref = content.title_ref.map((title, index) =>
-            title === "" && content.ref?.[index] ? content.ref[index] : title
-          );
+          if (Array.isArray(content.ref)) {
+            // กรองค่า "" ออกจาก ref และลบ title_ref ที่สอดคล้องกัน
+            const filteredRefs = content.ref
+              .map((ref, index) => ({
+                ref,
+                title: content.title_ref?.[index] || "",
+              }))
+              .filter(({ ref }) => ref.trim() !== "");
+
+            content.ref = filteredRefs.map(({ ref }) => ref);
+            content.title_ref = filteredRefs.map(({ title }) => title);
+          }
         });
       });
 
-      // วนลูปผ่านไฟล์ใน pendingUploads เพื่ออัปโหลดไฟล์ใหม่
       for (const key in pendingUploads) {
         const [groupIndex, contentIndex] = key.split("-").map(Number);
         const file = pendingUploads[key];
-        // ใช้ tempPageData เพื่อดึงค่า oldFileURL (secure URL ดั้งเดิม)
         const oldFileURL =
           tempPageData?.groups[groupIndex]?.contents[contentIndex]?.value || "";
         const imageUrl = await uploadImage(oldFileURL, file);
@@ -233,11 +234,9 @@ const EditContent = () => {
           imageUrl;
       }
 
-      // ส่งข้อมูล updatedPageData ไปบันทึกที่เซิร์ฟเวอร์
       await createOrUpdatePage(updatedPageData);
       setLoading(false);
       alert("Page updated successfully!");
-      // ล้าง pendingUploads เมื่อการอัปโหลดและบันทึกสำเร็จ
       setPendingUploads({});
     } catch {
       setLoading(false);

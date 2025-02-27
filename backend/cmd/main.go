@@ -25,7 +25,7 @@ func main() {
 	// Get environment type (e.g., "development", "production")
 	env := os.Getenv("APP_ENV")
 	if env == "" {
-		env = "development" // default to development if not set
+		env = "development"
 	}
 
 	// Connect to the database

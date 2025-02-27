@@ -1,8 +1,8 @@
-version: "3.8"
-
 services:
   db:
     image: postgres:13-alpine
+    env_file:
+      - ./backend/.env
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
@@ -10,7 +10,7 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "${DB_PORT:-5432}:5432"
     networks:
       - app-network
     healthcheck:
@@ -26,14 +26,8 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    environment:
-      DB_HOST: db
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_NAME: ${DB_NAME}
-      DB_PORT: ${DB_PORT}
-      JWT_SECRET: ${JWT_SECRET}
-      PORT: ${PORT:-8080} # fallback เป็น 8080
+    env_file:
+      - ./backend/.env
     ports:
       - "8080:8080"
     networks:
@@ -43,9 +37,10 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    env_file:
+      - ./frontend/.env
     environment:
-      # ชี้ไปที่ service backend ใน docker-compose (http://backend:8080)
-      NEXT_PUBLIC_API_URL: "http://backend:8080/api"
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
     depends_on:
       - backend
     ports:

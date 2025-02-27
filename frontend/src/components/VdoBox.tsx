@@ -31,7 +31,6 @@ const VdoBox: FC<VdoBoxProps> = ({ contents, hideEdit, notActive }) => {
   );
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
-  // const [tempContent, setTempContent] = useState<Contents>(contents);
   const { role } = useAuth();
   useEffect(() => {
     setVdoUrl(contents.value);
@@ -39,12 +38,8 @@ const VdoBox: FC<VdoBoxProps> = ({ contents, hideEdit, notActive }) => {
     setTitleRef(contents.title_ref);
     setNewTitleRef("");
     setNewRef("");
-    // setTempContent(contents);
   }, [contents, isEditing]);
 
-  // const [tempUrl, setTempUrl] = useState<string>(vdoUrl);
-  // const [isEditingRef, setIsEditingRef] = useState<boolean>(false);
-  // const [tempRef, setTempRef] = useState<string[]>(contents);
   const [newRef, setNewRef] = useState<string>("");
   const [newTitleRef, setNewTitleRef] = useState<string>("");
 
@@ -270,7 +265,6 @@ const VdoBox: FC<VdoBoxProps> = ({ contents, hideEdit, notActive }) => {
                 onChange={(e) =>
                   setVdoUrl(validateAndConvertYouTubeURL(e.target.value))
                 }
-                // sx={{ width: "300px" }}
               />
             </Box>
             Documant

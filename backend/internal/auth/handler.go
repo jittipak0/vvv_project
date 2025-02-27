@@ -57,7 +57,6 @@ func (h *AuthHandler) Login(c *gin.Context) {
 	// เก็บ Refresh Token ใน HttpOnly Cookie
 	//? Development: ให้ secure = false
 	c.SetCookie("refresh_token", refreshToken, int(24*time.Hour/time.Second), "/", "", false, true)
-	//! c.SetCookie("refresh_token", refreshToken, int(24*time.Hour/time.Second), "/", "", true, true)
 
 	log.Printf("[AuthHandler][Login] User %s logged in successfully", loggedInUser.Email)
 	c.JSON(http.StatusOK, gin.H{"token": accessToken, "user": loggedInUser})

@@ -6,7 +6,6 @@ import (
 	"vvv_backend/internal/auth"
 	"vvv_backend/internal/content"
 
-	//! "vvv_backend/internal/progress"
 	"vvv_backend/internal/storage"
 	"vvv_backend/internal/test"
 	"vvv_backend/internal/user"
@@ -83,12 +82,6 @@ func SetupRouter(db *gorm.DB, env string) *gin.Engine {
 		api.DELETE("/contents/:id", contentHandler.DeleteContent)
 		api.POST("/upload/image", contentHandler.UploadImageHandler)
 		api.DELETE("/upload/image/:fileURL", contentHandler.DeleteImageHandler)
-
-		//! Progress Management
-		//! progressHandler := progress.InitializeProgressHandler(db, userHandler.Service)
-		//! api.POST("/progress", progressHandler.SaveProgress)
-		//! api.GET("/progress/:user_id/:page_title", progressHandler.GetProgress)
-		//! api.DELETE("/progress/:user_id/:page_title", progressHandler.DelProgress)
 	}
 
 	return r

@@ -293,14 +293,9 @@ export default function HomePage() {
   const tutorialState = "tt1";
   const tutorial = useTutorialTracking(tutorialState);
   const [tutorialClose, setTutorialClose] = useState(false);
-
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
-  //! const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
-
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-
   const [isTouchDevice, setIsTouchDevice] = useState(true);
-  //! const isTouchDevice = !("onmousemove" in window);
 
   const router = useRouter();
 
@@ -458,17 +453,6 @@ export default function HomePage() {
           // สำหรับอุปกรณ์ที่ไม่มี cursor
           adjustedLeft = parseFloat(titlePosition.left);
           adjustedTop = parseFloat(titlePosition.top);
-
-          //! if (adjustedTop + showContentHeight + 10 < window.innerHeight) {
-          //!   adjustedTop += 10; // แสดงด้านล่างของ Title
-          //! } else if (adjustedTop - showContentHeight - 10 > 0) {
-          //!   adjustedTop -= showContentHeight + 10; // แสดงด้านบนของ Title
-          //! }
-          //! if (adjustedLeft + showContentWidth + 10 < window.innerWidth) {
-          //!   adjustedLeft += 10; // แสดงด้านขวาของ Title
-          //! } else if (adjustedLeft - showContentWidth - 10 > 0) {
-          //!   adjustedLeft -= showContentWidth + 10; // แสดงด้านซ้ายของ Title
-          //! }
 
           if (cursorPosition.y + showContentHeight + 10 < screenSize.height) {
             adjustedTop += 10;

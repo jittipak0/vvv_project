@@ -34,22 +34,6 @@ export default function CertificatePage() {
     }
   }, [user, router]);
 
-  //! useEffect(() => {
-  //!   setTimeout(() => {
-  //!     if (user?.highest_post_test_date) {
-  //!       const [date, month, year] = user.highest_post_test_date;
-
-  //!       setCertificateData({
-  //!         name: `${user?.fname}  ${user?.lname}`,
-  //!         day: date || "ไม่ระบุ",
-  //!         month: month || "ไม่ระบุ",
-  //!         year: year || "ไม่ระบุ",
-  //!       });
-  //!     }
-  //!     setLoading(false);
-  //!   }, 1000);
-  //! }, [user]);
-
   useEffect(() => {
     setTimeout(() => {
       if (user?.highest_post_test_date) {

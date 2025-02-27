@@ -125,7 +125,6 @@ const DataVisualizationComponent: FC<DataVisualizationProps> = ({
             justifyContent: "center",
             alignItems: "center",
             mb: { md: "80px", xs: "15px" },
-            // flexGrow: 1,
             bgcolor: "#fff",
             flexDirection: "column",
             zIndex: 999,

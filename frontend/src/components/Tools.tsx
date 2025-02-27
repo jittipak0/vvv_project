@@ -90,7 +90,6 @@ const ToolsComponent: FC<ToolsProps> = ({
               p: "5px 20px 5px 20px",
               borderRadius: "15px",
               alignItems: "center",
-              // height: "fit-content",
             }}
           >
             เครื่องมือในการประเมินชุมชน

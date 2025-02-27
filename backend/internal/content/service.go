@@ -67,7 +67,6 @@ func (s *ContentService) CreateOrUpdatePage(request *Page) (Page, error) {
 
 	// ใช้โครงสร้างของ Page เดิมถ้ามีอยู่
 	existingPage.Title = request.Title
-	//! existingPage.IsCountedInProgress = request.IsCountedInProgress
 
 	// ลบกลุ่มและเนื้อหาเก่าก่อนแทนที่ (เพื่อป้องกันซ้ำซ้อน)
 	if len(existingPage.Groups) > 0 {
@@ -281,7 +280,7 @@ func (s *ContentService) UploadImage(oldFileURL string, file io.Reader, fileName
 		err := s.Storage.DeleteFile(oldFileURL)
 		if err != nil {
 			log.Printf("[ContentService][UploadImage] Failed to delete old image: %v", err)
-			// return "", err
+			//? return "", err
 		} else {
 			log.Printf("[ContentService][UploadImage] Old image deleted successfully: %s", oldFileURL)
 		}

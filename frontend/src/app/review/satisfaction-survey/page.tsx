@@ -23,7 +23,6 @@ const SatisfactionSurvey = () => {
   const router = useRouter();
   const { user, updateUserState } = useAuth();
 
-  // ถ้า user.post_test_pass === false ให้พาไปหน้า /review/post-test
   useEffect(() => {
     if (user && user.post_test_pass === false) {
       router.push("/review/post-test");

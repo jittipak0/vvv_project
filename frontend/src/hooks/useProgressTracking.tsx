@@ -1,7 +1,6 @@
 import { useCallback } from "react";
 import { updateUser } from "@/services/endpoint/user";
 import { useAuth } from "./useAuth";
-// import { saveUserToStorage } from "@/utils/localStorage";
 
 export function useProgressTracking() {
   // ดึงข้อมูลผู้ใช้
@@ -39,7 +38,7 @@ export function useProgressTracking() {
       );
 
       // คำนวณ Progress
-      const progress = Math.round(VisitedPagesTracking.length / 0.40);
+      const progress = Math.round(VisitedPagesTracking.length / 0.4);
 
       // สร้าง Object ผู้ใช้ใหม่ที่อัปเดตแล้ว
       const updatedUser = {

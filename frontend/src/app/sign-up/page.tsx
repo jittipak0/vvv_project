@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import "@/styles/globals.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-// import API from "@/services/axiosConfig";
 import axios from "axios";
 import { signUp } from "@/services/endpoint/user";
 

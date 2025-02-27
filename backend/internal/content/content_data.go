@@ -2,13 +2,12 @@ package content
 
 var Pages = []Page{
 	{
-		Title: "home",
-		//! IsCountedInProgress: false,
+		Title:  "home",
 		Groups: []Group{},
 	},
 	{
 		Title: "community-hall",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "Board",
@@ -27,7 +26,7 @@ var Pages = []Page{
 	},
 	{
 		Title: "social-capital",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "ทุนทางสังคม 6 ระดับ",
@@ -46,7 +45,7 @@ var Pages = []Page{
 	},
 	{
 		Title: "community-potential",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "TCNAP",
@@ -58,7 +57,7 @@ var Pages = []Page{
 	},
 	{
 		Title: "learning-options",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "การวิเคราะห์ข้อมูลและการนำเสนอข้อมูล",
@@ -87,7 +86,7 @@ var Pages = []Page{
 	// health
 	{
 		Title: "health-forum",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "",
@@ -99,7 +98,7 @@ var Pages = []Page{
 	},
 	{
 		Title: "health-tool",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "Primary Data",
@@ -122,7 +121,7 @@ var Pages = []Page{
 	},
 	{
 		Title: "health-assessment-tool",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "",
@@ -134,7 +133,7 @@ var Pages = []Page{
 	},
 	{
 		Title: "health-data-visualization",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "โจทย์",
@@ -156,7 +155,7 @@ var Pages = []Page{
 	},
 	{
 		Title: "health-quiz",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "โจทย์",
@@ -179,7 +178,7 @@ var Pages = []Page{
 	// society
 	{
 		Title: "society-forum",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "",
@@ -191,7 +190,7 @@ var Pages = []Page{
 	},
 	{
 		Title: "society-tool",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "Primary Data",
@@ -214,7 +213,7 @@ var Pages = []Page{
 	},
 	{
 		Title: "society-assessment-tool",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "",
@@ -226,7 +225,7 @@ var Pages = []Page{
 	},
 	{
 		Title: "society-data-visualization",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "โจทย์",
@@ -248,7 +247,7 @@ var Pages = []Page{
 	},
 	{
 		Title: "society-quiz",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "โจทย์",
@@ -271,7 +270,7 @@ var Pages = []Page{
 	// environment
 	{
 		Title: "environment-forum",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "",
@@ -283,7 +282,7 @@ var Pages = []Page{
 	},
 	{
 		Title: "environment-tool",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "Primary Data",
@@ -307,7 +306,7 @@ var Pages = []Page{
 	},
 	{
 		Title: "environment-assessment-tool",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "",
@@ -320,7 +319,7 @@ var Pages = []Page{
 	},
 	{
 		Title: "environment-data-visualization",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "โจทย์",
@@ -342,7 +341,7 @@ var Pages = []Page{
 	},
 	{
 		Title: "environment-quiz",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "โจทย์",
@@ -365,7 +364,7 @@ var Pages = []Page{
 	// economy
 	{
 		Title: "economy-forum",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "",
@@ -377,7 +376,7 @@ var Pages = []Page{
 	},
 	{
 		Title: "economy-tool",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "Primary Data",
@@ -399,7 +398,7 @@ var Pages = []Page{
 	},
 	{
 		Title: "economy-assessment-tool",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "",
@@ -411,7 +410,7 @@ var Pages = []Page{
 	},
 	{
 		Title: "economy-data-visualization",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "โจทย์",
@@ -433,7 +432,7 @@ var Pages = []Page{
 	},
 	{
 		Title: "economy-quiz",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "โจทย์",
@@ -456,7 +455,7 @@ var Pages = []Page{
 	// politics
 	{
 		Title: "politics-forum",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "",
@@ -468,7 +467,7 @@ var Pages = []Page{
 	},
 	{
 		Title: "politics-tool",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "Primary Data",
@@ -490,7 +489,7 @@ var Pages = []Page{
 	},
 	{
 		Title: "politics-assessment-tool",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "",
@@ -502,7 +501,7 @@ var Pages = []Page{
 	},
 	{
 		Title: "politics-data-visualization",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "โจทย์",
@@ -524,7 +523,7 @@ var Pages = []Page{
 	},
 	{
 		Title: "politics-quiz",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "โจทย์",
@@ -545,7 +544,7 @@ var Pages = []Page{
 	},
 	{
 		Title: "satisfaction-survey",
-		//! IsCountedInProgress: true,
+
 		Groups: []Group{
 			{
 				Name: "ลิงค์แบบประเมิน",

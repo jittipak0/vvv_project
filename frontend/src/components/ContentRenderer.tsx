@@ -49,7 +49,7 @@ const ContentRenderer: FC<ContentRendererProps> = ({
     );
   }
 
-  return null; // ถ้า type ไม่ตรงกับที่กำหนดไว้ จะไม่แสดงอะไรเลย
+  return null;
 };
 
 export default ContentRenderer;

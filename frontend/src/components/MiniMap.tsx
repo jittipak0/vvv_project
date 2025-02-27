@@ -43,8 +43,6 @@ const MiniMap: FC<MinimapProps> = ({
           sx={{
             height: "100%",
             width: "100%",
-            // minHeight: "100px",
-            // minWidth: "100px",
             bgcolor: "#fff",
             borderRadius: "50%",
             position: "absolute",
@@ -57,10 +55,6 @@ const MiniMap: FC<MinimapProps> = ({
           size="100%"
           sx={{
             color: "var(--color_primary)",
-            // width: { xs: "100px", md: "100%" },
-            // height: { xs: "100px", sm: "100%" },
-            // width: "200px",
-            // height: "200px",
           }}
         />
 

@@ -42,5 +42,8 @@ COPY --from=builder /app/public ./public
 # เปิดพอร์ต 3000 (ค่า default ของ Next.js)
 EXPOSE 3000
 
+# โหลดค่า Environment Variables ให้ Next.js ใช้
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+
 # รันเซิร์ฟเวอร์ Next.js
 CMD ["npm", "run", "start"]

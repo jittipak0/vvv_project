@@ -363,7 +363,6 @@ const TestComponent: React.FC<TestProps> = ({ title, backPage }) => {
                           ml: "auto",
                           mr: "auto",
                         }}
-                        // href="/review/satisfaction-survey"
                         onClick={handleNextPage}
                       >
                         ไปหน้าถัดไป

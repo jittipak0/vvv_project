@@ -42,16 +42,6 @@ export interface TestRequest {
   questions: QuestionRequest[];
 }
 
-//! export interface ProgressResponse {
-//!   id: number;
-//!   first_time: boolean;
-//!   completed: boolean;
-//!   is_counted_in_progress: boolean;
-//!   last_visited: string;
-//!   created_at: string;
-//!   updated_at: string;
-//! }
-
 interface UserAnswer {
   question_id: number;
   selected_options: number[];

@@ -35,7 +35,6 @@ func (r *ContentRepository) CreateOrUpdatePage(tx *gorm.DB, page *Page) error {
 
 	} else {
 		log.Printf("[Repository][CreateOrUpdatePage] Updating existing page: Title=%s, ID=%d", existingPage.Title, existingPage.ID)
-		//! existingPage.IsCountedInProgress = page.IsCountedInProgress
 		if err := tx.Save(&existingPage).Error; err != nil {
 			log.Printf("[Repository][CreateOrUpdatePage] Failed to update page: Title=%s, ID=%d, Error=%v", existingPage.Title, existingPage.ID, err)
 			return err

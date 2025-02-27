@@ -29,22 +29,19 @@ FROM alpine:3.18
 
 
 # ติดตั้ง CA certificates
-RUN apk --no-cache add ca-certificates
-
-# ตั้งค่าตัวแปร environment สำหรับ Production
-ENV PORT=8080
+RUN apk --no-cache add ca-certificates bash
 
 # สร้างโฟลเดอร์สำหรับแอปพลิเคชัน
 WORKDIR /root/
 
-# คัดลอก executable จาก stage ก่อนหน้า
+# คัดลอกไฟล์จาก Builder Stage
 COPY --from=builder /app/backend .
 
-# คัดลอกไฟล์ .env
+# คัดลอกไฟล์ .env เข้าไปใน Container
 COPY .env .env
 
 # เปิดพอร์ตที่ต้องการ
 EXPOSE 8080
 
-# รันแอปพลิเคชัน
-CMD ["./backend"]
+# รันแอปพลิเคชันโดยใช้ .env
+CMD ["sh", "-c", "export $(grep -v '^#' .env | xargs) && ./backend"]

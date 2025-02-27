@@ -1,5 +1,4 @@
 import { useProgressTracking } from "@/hooks/useProgressTracking";
-// import { useAuth } from "@/hooks/useAuth";
 import { Box } from "@mui/material";
 import { FC, ReactNode, useState } from "react";
 

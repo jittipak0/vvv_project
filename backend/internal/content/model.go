@@ -8,7 +8,6 @@ type Page struct {
 	Groups    []Group   `gorm:"foreignKey:PageID;constraint:OnDelete:CASCADE" json:"groups"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
-	//! IsCountedInProgress bool      `gorm:"default:true" json:"is_counted_in_progress"`
 }
 
 type Group struct {

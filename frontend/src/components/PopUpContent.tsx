@@ -73,7 +73,6 @@ const PopUpContent: React.FC<PopUpContentProps> = ({
                   : "/images/p_r.png"
               }
               sx={{
-                // height: "18vmax",
                 width: "100%",
                 cursor: "pointer",
                 left: "50%",
@@ -114,7 +113,6 @@ const PopUpContent: React.FC<PopUpContentProps> = ({
               : "/images/p_r.png"
           }
           sx={{
-            // height: "18vmax",
             width: "100%",
             cursor: "pointer",
             left: "50%",
@@ -140,7 +138,6 @@ const PopUpContent: React.FC<PopUpContentProps> = ({
             zIndex: 1000,
             overflow: "hidden",
             flexWrap: "wrap",
-            // padding: 2,
           }}
         >
           {/* ถ้าไม่มีข้อมูลให้แสดงข้อความ */}
@@ -151,7 +148,6 @@ const PopUpContent: React.FC<PopUpContentProps> = ({
               sx={{
                 display: "flex",
                 flexDirection: { lg: "row", xs: "column" },
-                // flexWrap: "wrap",
                 justifyContent: "center",
                 alignItems: "center",
                 gap: 2,
