@@ -10,7 +10,7 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
     ports:
-      - "${DB_PORT:-5432}:5432"
+      - "${DB_PORT}:5432"
     networks:
       - app-network
     healthcheck:
@@ -29,7 +29,7 @@ services:
     env_file:
       - ./backend/.env
     ports:
-      - "8080:8080"
+      - "${PORT}:8080"
     networks:
       - app-network
 
@@ -44,7 +44,7 @@ services:
     depends_on:
       - backend
     ports:
-      - "3000:3000"
+      - "3001:3000"
     networks:
       - app-network
 
