@@ -38,7 +38,10 @@ export function useProgressTracking() {
       );
 
       // คำนวณ Progress
-      const progress = Math.round(VisitedPagesTracking.length / 0.37);
+      const progress = Math.min(
+        Math.round(VisitedPagesTracking.length / 0.37),
+        100
+      );
 
       // สร้าง Object ผู้ใช้ใหม่ที่อัปเดตแล้ว
       const updatedUser = {

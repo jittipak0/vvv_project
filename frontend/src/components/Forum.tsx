@@ -62,7 +62,7 @@ const ForumComponent: FC<ForumProps> = ({
         sx={{
           display: "flex",
           justifyContent: "center",
-          width: { xs: "100vw", sm: "65%" },
+          width: { xs: "100vw", md: `calc(100% - 38vmin)` },
           mt: "30px",
           zIndex: 2,
         }}
@@ -81,7 +81,7 @@ const ForumComponent: FC<ForumProps> = ({
           display: "flex",
           justifyContent: "center",
           mb: "50px",
-          mt: { xs: "70px", sm: "0px", lg: "-12%" },
+          mt: characters.length > 2 ? { xs: "80px", md: "25px" } : "25px",
         }}
       >
         <Box
@@ -95,16 +95,16 @@ const ForumComponent: FC<ForumProps> = ({
             sx={{
               display: "flex",
               alignItems: "flex-end",
-              justifyContent: { xs: "center", sm: "end" },
+              justifyContent: { xs: "center", md: "end" },
               zIndex: 1,
-              right: 0,
-              position: "relative",
+              right: { xs: 0, md: "5%" },
+              position: { xs: "relative", md: "absolute" },
               width: "90%",
             }}
           >
             <Box
               sx={{
-                position: "relative",
+                position: { xs: "relative", md: "absolute" },
                 alignItems: "center",
                 justifyContent: "center",
               }}
@@ -115,7 +115,8 @@ const ForumComponent: FC<ForumProps> = ({
                 alt="character"
                 sx={{
                   zIndex: 2,
-                  width: "20vmin",
+                  width: { xs: "20vmin", sm: "15vmin" },
+                  minWidth: "10vw",
                   objectFit: "contain",
                 }}
               />
@@ -126,7 +127,8 @@ const ForumComponent: FC<ForumProps> = ({
                 alt="character"
                 sx={{
                   zIndex: 2,
-                  width: "20vmin",
+                  width: { xs: "20vmin", sm: "15vmin" },
+                  minWidth: "10vw",
                   objectFit: "contain",
                 }}
               />
@@ -137,7 +139,8 @@ const ForumComponent: FC<ForumProps> = ({
                   alt="character"
                   sx={{
                     zIndex: -1,
-                    width: "20vmin",
+                    width: { xs: "20vmin", sm: "15vmin" },
+                    minWidth: "10vw",
                     objectFit: "contain",
                     position: "absolute",
                     transform: "translate(-50%, -40%)",
@@ -184,7 +187,8 @@ const ForumComponent: FC<ForumProps> = ({
                   bgcolor: "var(--color_bg_text_box)",
                   borderRadius: "5px",
                   textAlign: "center",
-                  fontSize: { sm: "15px", md: "2.5vmin" },
+                  // fontSize: { sm: "15px", md: "2.5vmin" },
+                  fontSize: `clamp(12px, 2.5vmin, 24px)`,
                 }}
               >
                 {dialog}

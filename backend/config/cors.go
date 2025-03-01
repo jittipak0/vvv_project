@@ -14,7 +14,7 @@ func GetCORSConfig(env string) cors.Config {
 	if env == "production" {
 		allowedOriginsEnv := os.Getenv("ALLOW_ORIGINS")
 		if allowedOriginsEnv == "" {
-			allowedOriginsEnv = "https://mydomain.com"
+			allowedOriginsEnv = "http://10.101.111.26:3010"
 		}
 		// แยกด้วย comma
 		origins := strings.Split(allowedOriginsEnv, ",")

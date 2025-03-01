@@ -28,28 +28,51 @@ services:
       dockerfile: Dockerfile
     env_file:
       - ./backend/.env
+    expose:
+      - "8080"
     ports:
       - "${PORT}:8080"
     networks:
       - app-network
 
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    env_file:
-      - ./frontend/.env
-    environment:
-      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
-    depends_on:
-      - backend
-    ports:
-      - "3001:3000"
-    networks:
-      - app-network
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   env_file:
+  #     - ./frontend/.env
+  #   environment:
+  #     NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+  #   depends_on:
+  #     - backend
+  #   expose:
+  #     - "3000"
+  #   ports:
+  #     - "3010:3000"
+  #   networks:
+  #     - app-network
+
+  # caddy:
+  #   image: caddy:latest
+  #   container_name: caddy_proxy
+  #   restart: unless-stopped
+  #   ports:
+  #     - "8098:80"
+  #     - "447:443"
+  #   volumes:
+  #     - ./Caddyfile:/etc/caddy/Caddyfile
+  #     - caddy_data:/data
+  #     - caddy_config:/config
+  #   depends_on:
+  #     - frontend
+  #     - backend
+  #   networks:
+  #     - app-network
 
 volumes:
   db_data:
+  # caddy_data:
+  # caddy_config:
 
 networks:
   app-network:

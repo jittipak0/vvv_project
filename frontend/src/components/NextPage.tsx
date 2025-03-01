@@ -18,9 +18,9 @@ const NextPage: FC<NextPageProps> = ({
   const handleNextPage = () => {
     if (setProgress) {
       trackProgress(setProgress);
-      if (setLearningTitle) {
-        trackProgress(setLearningTitle);
-      }
+    }
+    if (setLearningTitle) {
+      trackProgress(setLearningTitle);
     }
     window.location.href = url;
   };

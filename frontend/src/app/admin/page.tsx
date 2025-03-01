@@ -90,9 +90,7 @@ const TeacherDashboard = () => {
       100
   );
 
-  const completedCount = students.filter(
-    (s) => s.total_progress === 100
-  ).length;
+  const completedCount = students.filter((s) => s.total_progress >= 100).length;
 
   // Pie Chart: เปรียบเทียบความก้าวหน้าของนักเรียน
   const total_total_progressData = {
