@@ -6,26 +6,35 @@ import NavBar from "@/components/NavBar";
 
 const team = [
   {
-    src: "/images/about/ธัญญ์รวี_  รัฐรวีศิรไกร _.jpg",
+    src: "/images/about/นางสาวธัญญ์รวี รัฐรวีศิรไกร.png",
     name: "นางสาวธัญญ์รวี  รัฐรวีศิรไกร",
   },
-  { src: "/images/about/ธันยพร วาสนาม_.jpg", name: "นางสาวธันยพร  วาสนาม" },
   {
-    src: "/images/about/อรสิณี   เสนานิมิตร .jpg",
+    src: "/images/about/นางสาวธันยพร วาสนาม_.png",
+    name: "นางสาวธันยพร  วาสนาม",
+  },
+  {
+    src: "/images/about/นางสาวอรสิณี เสนานิมิต.png",
     name: "นางสาวอรสิณี  เสนานิมิต",
   },
-  { src: "/images/about/ธนพร  ภูเลื่อน .jpg", name: "นางสาวธนพร  ภูเลื่อน" },
-  { src: "/images/about/กัณฑิมา วัณมา.png", name: "นางสาวกัณฑิมา  วันมา" },
   {
-    src: "/images/about/จิตรานันท์     เพิ่มขึ้น_.png",
+    src: "/images/about/นางสาวธนพร ภูเลื่อน.png",
+    name: "นางสาวธนพร  ภูเลื่อน",
+  },
+  {
+    src: "/images/about/นางสาวกัณฑิมา วันมา_.png",
+    name: "นางสาวกัณฑิมา  วันมา",
+  },
+  {
+    src: "/images/about/นางสาวจิตรานันท์ เพิ่มขึ้น .png",
     name: "นางสาวจิตรานันท์  เพิ่มขึ้น",
   },
   {
-    src: "/images/about/ธนัททิพย์     ศิริชัยวัฒนกุล_.png",
+    src: "/images/about/นางสาวธนัททิพย์ ศิริชัยวัฒนกุล_.png",
     name: "นางสาวธนัททิพย์  ศิริชัยวัฒนกุล",
   },
   {
-    src: "/images/about/ประพิมพ์พลอย ทองภูธรณ์.jpg",
+    src: "/images/about/นางสาวประพิมพ์พลอย ทองภูธรณ์.png",
     name: "นางสาวประพิมพ์พลอย  ทองภูธรณ์",
   },
 ];
@@ -189,8 +198,8 @@ export default function AboutPage() {
                     src={item.src}
                     alt={item.name}
                     sx={{
-                      maxWidth: "200px",
-                      maxHeight: "200px",
+                      maxWidth: "180px",
+                      maxHeight: "180px",
                       mb: 1,
                     }}
                   />
