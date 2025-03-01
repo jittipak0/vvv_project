@@ -166,7 +166,7 @@ export default function SignUp() {
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <TextField
             fullWidth
-            label="รหัสนักศักษา"
+            label="รหัสนักศึกษา"
             variant="outlined"
             margin="normal"
             type="text"

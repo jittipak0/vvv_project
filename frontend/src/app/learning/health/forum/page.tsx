@@ -25,7 +25,7 @@ export default function HealthForum() {
           "/images/พนักงานรพ.สต.png",
           "/images/ผู้ใหญ่บ้าน.png",
         ]}
-        dialog="ยินดีต้อนรับนักศึกษาพยาบาลศาตร์เข้าสู่การเรียนรู้ศักยภาพด้านสุขภาพ ขอให้น้องนักศึกษาเรียนรู้ผ่าน Video เพื่อทำความรู้จักกับศักยภาพด้านสุขภาพก่อนนะคะ"
+        dialog="ยินดีต้อนรับนักศึกษาพยาบาลศาสตร์เข้าสู่การเรียนรู้ศักยภาพด้านสุขภาพ ขอให้น้องนักศึกษาเรียนรู้ผ่าน Video เพื่อทำความรู้จักกับศักยภาพด้านสุขภาพก่อนนะคะ"
         backgroundImage="/images/5.webp"
         backPage="/review/community-potential"
         nextPage="/learning/health/select-tool"

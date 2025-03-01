@@ -21,7 +21,7 @@ export default function HealthForum() {
         progress={user?.total_progress ?? 0}
         contents={pageData}
         characters={["/images/อสม2.png", "/images/ผู้ใหญ่บ้าน.png"]}
-        dialog="ยินดีต้อนรับนักศึกษาพยาบาลศาตร์เข้าสู่การเรียนรู้ศักยภาพด้านสิ่งแวดล้อม ขอให้น้องนักศึกษาเรียนรู้ผ่าน Video เพื่อทำความรู้จักกับศักยภาพด้านสิ่งแวดล้อมก่อนนะคะ"
+        dialog="ยินดีต้อนรับนักศึกษาพยาบาลศาสตร์เข้าสู่การเรียนรู้ศักยภาพด้านสิ่งแวดล้อม ขอให้น้องนักศึกษาเรียนรู้ผ่าน Video เพื่อทำความรู้จักกับศักยภาพด้านสิ่งแวดล้อมก่อนนะคะ"
         backgroundImage="/images/4.webp"
         backPage="/review/community-potential"
         nextPage="/learning/environment/select-tool"

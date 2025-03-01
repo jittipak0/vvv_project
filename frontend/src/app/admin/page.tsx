@@ -174,7 +174,7 @@ const TeacherDashboard = () => {
         >
           <Paper sx={{ p: 4, width: { md: "65%", xs: "auto" } }}>
             <Box sx={{ fontSize: "1.3rem" }}>
-              📊 คะแนน Pre-test/Post-test เฉลีย
+              📊 คะแนน Pre-test/Post-test เฉลี่ย
             </Box>
             <Box
               sx={{

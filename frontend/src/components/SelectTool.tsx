@@ -125,7 +125,7 @@ const SelectToolComponent: FC<SelectToolProps> = ({
               pr: "20px",
             }}
           >
-            เลือกเครื่องมือ
+            เครื่องมือในการประเมินชุมชน
           </Typography>
         </Box>
 

@@ -54,7 +54,7 @@ const ToolsComponent: FC<ToolsProps> = ({
           <Box sx={{ zIndex: 2 }}>
             <Tutorial
               text={[
-                "น้องนักศึกษาทราบไหมคะว่า การเลือกเครื่องมือเก็บข้อมูลมีที่เหมาะสม จะทำให้เราได้ข้อมูลที่มีคุณภาพ มีความแม่นยำ ซึ่งจะนำไปสู่การวิเคราะห์ข้อมูลเพื่อนำไปพัฒนาชุมชนได้อย่างเหมาะสมนั่นเองค่ะ",
+                "น้องนักศึกษาทราบไหมคะว่า การเลือกเครื่องมือเก็บข้อมูลที่เหมาะสม จะทำให้เราได้ข้อมูลที่มีคุณภาพ มีความแม่นยำ ซึ่งจะนำไปสู่การวิเคราะห์ข้อมูลเพื่อนำไปพัฒนาชุมชนได้อย่างเหมาะสมนั่นเองค่ะ",
               ]}
               tutorialState={tutorialState}
               onClose={() => setTutorialClose(true)}
@@ -122,7 +122,7 @@ const ToolsComponent: FC<ToolsProps> = ({
                     width: "fit-content",
                   }}
                 >
-                  Primary Data (เก็บเอง)
+                  Primary Data
                 </Box>
               </Box>
 
@@ -173,7 +173,7 @@ const ToolsComponent: FC<ToolsProps> = ({
                     width: "fit-content",
                   }}
                 >
-                  เครื่องมือในการประเมินชุมชน
+                  Secondary Data
                 </Box>
               </Box>
 

@@ -115,7 +115,7 @@ const DataVisualizationComponent: FC<DataVisualizationProps> = ({
               mb: { md: "80px", xs: "40px" },
             }}
           >
-            การวิเคราะห์ข้อมูลเเละการนำเสนอ
+            การวิเคราะห์เเละการนำเสนอข้อมูล
           </Box>
         </Box>
 

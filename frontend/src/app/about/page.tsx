@@ -1,39 +1,32 @@
 "use client";
 
-import {
-  Container,
-  Typography,
-  Card,
-  CardContent,
-  Divider,
-  Stack,
-} from "@mui/material";
+import { Typography, Card, CardContent, Divider, Stack } from "@mui/material";
 import { Box } from "@mui/system";
 import NavBar from "@/components/NavBar";
 
 const team = [
-  { src: "/images/about/กัณฑิมา วัณมา.png", name: "นางสาวกัณฑิมา  วันมา" },
-  {
-    src: "/images/about/จิตรานันท์     เพิ่มขึ้น_.png",
-    name: "นางสาวจิตรานันท์  เพิ่มขึ้น",
-  },
-  { src: "/images/about/ธนพร  ภูเลื่อน .jpg", name: "นางสาวธนพร  ภูเลื่อน" },
-  {
-    src: "/images/about/ธนัททิพย์     ศิริชัยวัฒนกุล_.png",
-    name: "นางสาวธนัททิพย์  ศิริชัยวัฒนกุล",
-  },
   {
     src: "/images/about/ธัญญ์รวี_  รัฐรวีศิรไกร _.jpg",
     name: "นางสาวธัญญ์รวี  รัฐรวีศิรไกร",
   },
   { src: "/images/about/ธันยพร วาสนาม_.jpg", name: "นางสาวธันยพร  วาสนาม" },
   {
-    src: "/images/about/ประพิมพ์พลอย ทองภูธรณ์.jpg",
-    name: "นางสาวประพิมพ์พลอย  ทองภูธรณ์",
-  },
-  {
     src: "/images/about/อรสิณี   เสนานิมิตร .jpg",
     name: "นางสาวอรสิณี  เสนานิมิต",
+  },
+  { src: "/images/about/ธนพร  ภูเลื่อน .jpg", name: "นางสาวธนพร  ภูเลื่อน" },
+  { src: "/images/about/กัณฑิมา วัณมา.png", name: "นางสาวกัณฑิมา  วันมา" },
+  {
+    src: "/images/about/จิตรานันท์     เพิ่มขึ้น_.png",
+    name: "นางสาวจิตรานันท์  เพิ่มขึ้น",
+  },
+  {
+    src: "/images/about/ธนัททิพย์     ศิริชัยวัฒนกุล_.png",
+    name: "นางสาวธนัททิพย์  ศิริชัยวัฒนกุล",
+  },
+  {
+    src: "/images/about/ประพิมพ์พลอย ทองภูธรณ์.jpg",
+    name: "นางสาวประพิมพ์พลอย  ทองภูธรณ์",
   },
 ];
 
@@ -48,12 +41,14 @@ const advisor = [
 
 export default function AboutPage() {
   return (
-    <Container
+    <Box
       sx={{
-        mt: 4,
-        mb: 4,
         display: "flex",
         justifyContent: "center",
+        backgroundImage: `url('/images/IMG_1453.png')`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        minHeight: "100vh",
       }}
     >
       <Box
@@ -68,6 +63,8 @@ export default function AboutPage() {
       </Box>
       <Card
         sx={{
+          mt: 4,
+          mb: 4,
           maxWidth: 900,
           width: "100%",
           boxShadow: 3,
@@ -95,9 +92,8 @@ export default function AboutPage() {
               เกี่ยวกับนวัตกรรม Vital Village Vitality
             </Typography>
             <Typography variant="body1" paragraph>
-              Community health assessment learning system “Vital Village
-              Vitality : Community health assessment learning system”
-              นวัตกรรมจำลองสถานการณ์เสมือนจริงสำหรับนักศึกษาพยาบาล
+              “Vital Village Vitality : Community health assessment learning
+              system” นวัตกรรมจำลองสถานการณ์เสมือนจริงสำหรับนักศึกษาพยาบาล
               เพื่อเตรียมความพร้อมในการประเมินสุขภาพชุมชนก่อนปฏิบัติงานจริง
               เน้นการเรียนรู้แบบลงมือทำผ่านแผนที่หมู่บ้านจำลอง ศาลากลางบ้าน
               และจุดมาร์กการเรียนรู้ต่าง ๆ
@@ -156,9 +152,7 @@ export default function AboutPage() {
             <Divider />
 
             {/* ส่วน: รายวิชา */}
-            <Typography variant="h6" component="h2">
-              รายวิชา
-            </Typography>
+
             <Typography variant="body1" paragraph>
               นวัตกรรมนี้เป็นส่วนหนึ่งของรายวิชา NU113 310
               โครงงานนวัตกรรมทางการพยาบาล (Health Innovation Project) ปีการศึกษา
@@ -207,6 +201,6 @@ export default function AboutPage() {
           </Stack>
         </CardContent>
       </Card>
-    </Container>
+    </Box>
   );
 }
