@@ -19,6 +19,7 @@ import NavBar from "@/components/NavBar";
 import { getUserByRole } from "@/services/endpoint/user";
 import EditUserPopup from "@/components/EditUserPopup";
 import { User } from "@/types/api";
+import { useAuth } from "@/hooks/useAuth";
 
 // **Register Scales และ Components ที่ใช้**
 ChartJS.register(
@@ -36,6 +37,7 @@ const TeacherDashboard = () => {
   const [search, setSearch] = useState("");
   const [filteredStudents, setFilteredStudents] = useState(students);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const { role } = useAuth();
 
   useEffect(() => {
     const fetchStudents = async () => {
@@ -423,7 +425,7 @@ const TeacherDashboard = () => {
                 },
                 {
                   field: "edit",
-                  headerName: "ดู/แก้ไข",
+                  headerName: role == "admin" ? "ดู/แก้ไข" : "รายละเอียด",
                   width: 100,
                   headerAlign: "center",
                   align: "center",
@@ -432,7 +434,7 @@ const TeacherDashboard = () => {
                       variant="outlined"
                       onClick={() => setSelectedUser(params.row)}
                     >
-                      ดู/แก้ไข
+                      {role == "admin" ? "ดู/แก้ไข" : "ดู"}
                     </Button>
                   ),
                 },
@@ -444,6 +446,7 @@ const TeacherDashboard = () => {
 
       {selectedUser && (
         <EditUserPopup
+          role={role}
           user={selectedUser}
           onClose={() => setSelectedUser(null)}
           onSave={(updatedUser) => {

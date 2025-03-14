@@ -6,6 +6,7 @@ import { delUserByID, updateUser } from "@/services/endpoint/user";
 import { User } from "@/types/api";
 
 interface EditUserPopupProps {
+  role: string;
   user: User;
   onClose: () => void;
   onSave: (updatedUser: User) => void;
@@ -13,6 +14,7 @@ interface EditUserPopupProps {
 }
 
 const EditUserPopup: React.FC<EditUserPopupProps> = ({
+  role,
   user,
   onClose,
   onSave,
@@ -100,16 +102,16 @@ const EditUserPopup: React.FC<EditUserPopupProps> = ({
     }
   };
 
-  const satisfactionLabels: { [key: string]: string } = {
-    age: "อายุ",
-    occupation: "อาชีพ",
-    usage_count: "จำนวนครั้งที่เข้าใช้",
-    usage_period: "หน่วย (วัน,สัปดาห์,เดือน,ปี)",
-    ease_of_use: "ความง่ายในการใช้งาน",
-    overall_satisfaction: "ความพึงพอใจโดยรวม",
-    suggestions: "ข้อเสนอแนะ",
-    date: "วันที่ทำแบบประเมิน",
-  };
+  // const satisfactionLabels: { [key: string]: string } = {
+  //   age: "อายุ",
+  //   occupation: "อาชีพ",
+  //   usage_count: "จำนวนครั้งที่เข้าใช้",
+  //   usage_period: "หน่วย (วัน,สัปดาห์,เดือน,ปี)",
+  //   ease_of_use: "ความง่ายในการใช้งาน",
+  //   overall_satisfaction: "ความพึงพอใจโดยรวม",
+  //   suggestions: "ข้อเสนอแนะ",
+  //   date: "วันที่ทำแบบประเมิน",
+  // };
 
   return (
     <Paper
@@ -134,87 +136,114 @@ const EditUserPopup: React.FC<EditUserPopupProps> = ({
           mb: 2,
         }}
       >
-        <Typography variant="h5">ดู / แก้ไข ข้อมูลผู้ใช้</Typography>
-        <Button
-          variant="contained"
-          color="error"
-          onClick={handleDeleteUser}
-          disabled={loading}
-        >
-          Delete user
-        </Button>
+        <Typography variant="h5">
+          {role == "admin" ? "ดู / แก้ไข ข้อมูลผู้ใช้" : "ข้อมูลผู้ใช้"}
+        </Typography>
+        {role == "admin" && (
+          <Button
+            variant="contained"
+            color="error"
+            onClick={handleDeleteUser}
+            disabled={loading}
+          >
+            Delete user
+          </Button>
+        )}
       </Box>
 
-      <TextField
-        fullWidth
-        label="ชื่อจริง"
-        name="fname"
-        value={formData.fname}
-        onChange={handleChange}
-        sx={{ mb: 2 }}
-      />
-      <TextField
-        fullWidth
-        label="นามสกุล"
-        name="lname"
-        value={formData.lname}
-        onChange={handleChange}
-        sx={{ mb: 2 }}
-      />
-      <TextField
-        fullWidth
-        label="Email"
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-        sx={{ mb: 2 }}
-      />
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          mb: 2,
-          gap: 2,
-          justifyContent: "center",
-        }}
-      >
-        <TextField
-          fullWidth
-          label="รหัสนักศึกษา"
-          name="student_id"
-          value={formData.student_id || ""}
-          onChange={handleChange}
-        />
-        {"Sec."}
-        <TextField
-          placeholder="No."
-          margin="normal"
-          type="text"
-          inputMode="numeric"
-          value={formData.section || ""}
-          onChange={(e) => {
-            const value = e.target.value;
-            if (
-              /^\d*$/.test(value) &&
-              (value === "" || parseInt(value, 10) <= 999)
-            ) {
-              setFormData({ ...formData, section: value });
-            }
-          }}
-          inputProps={{
-            pattern: "[0-9]*",
-          }}
-          sx={{ width: "100px" }}
-        />
-      </Box>
-      <TextField
-        fullWidth
-        label="อาจารย์ที่ปรึกษา"
-        name="adviser"
-        value={formData.adviser || ""}
-        onChange={handleChange}
-        sx={{ mb: 2 }}
-      />
+      {role == "admin" && (
+        <Box>
+          <TextField
+            fullWidth
+            label="ชื่อจริง"
+            name="fname"
+            value={formData.fname}
+            onChange={handleChange}
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            fullWidth
+            label="นามสกุล"
+            name="lname"
+            value={formData.lname}
+            onChange={handleChange}
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            fullWidth
+            label="Email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            sx={{ mb: 2 }}
+          />
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              mb: 2,
+              gap: 2,
+              justifyContent: "center",
+            }}
+          >
+            <TextField
+              fullWidth
+              label="รหัสนักศึกษา"
+              name="student_id"
+              value={formData.student_id || ""}
+              onChange={handleChange}
+            />
+            {"Sec."}
+            <TextField
+              placeholder="No."
+              margin="normal"
+              type="text"
+              inputMode="numeric"
+              value={formData.section || ""}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (
+                  /^\d*$/.test(value) &&
+                  (value === "" || parseInt(value, 10) <= 999)
+                ) {
+                  setFormData({ ...formData, section: value });
+                }
+              }}
+              inputProps={{
+                pattern: "[0-9]*",
+              }}
+              sx={{ width: "100px" }}
+            />
+          </Box>
+          <TextField
+            fullWidth
+            label="อาจารย์ที่ปรึกษา"
+            name="adviser"
+            value={formData.adviser || ""}
+            onChange={handleChange}
+            sx={{ mb: 2 }}
+          />
+        </Box>
+      )}
+      {role !== "admin" && (
+        <Box>
+          {[
+            { label: "ชื่อจริง", value: formData.fname },
+            { label: "นามสกุล", value: formData.lname },
+            { label: "Email", value: formData.email },
+            { label: "รหัสนักศึกษา", value: formData.student_id },
+            { label: "Sec.", value: formData.section },
+            { label: "อาจารย์ที่ปรึกษา", value: formData.adviser },
+          ].map((item, index) => (
+            <Box key={index} mb={1}>
+              <Typography variant="body1">
+                {item.label} : {item.value ?? "-"}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+      )}
+
       <TextField
         fullWidth
         label="หมายเหตุ"
@@ -231,26 +260,32 @@ const EditUserPopup: React.FC<EditUserPopupProps> = ({
         <Box fontWeight="bold" mb={1}>
           คะแนน
         </Box>
-        <Box mb={1}>
-          <Typography variant="body1">
-            Pre test : {formData.pre_test_score ?? "-"} คะแนน ทำเมื่อ{" "}
-            {formatThaiDate(formData.pre_test_date || null)}
-          </Typography>
-        </Box>
-        <Box mb={1}>
-          <Typography variant="body1">
-            Post test : {formData.post_test_score ?? "-"} คะแนน ทำเมื่อ{" "}
-            {formatThaiDate(formData.post_test_date || null)}
-          </Typography>
-        </Box>
-        <Box mb={2}>
-          <Typography variant="body1">
-            Post test สูงสุด : {formData.highest_post_test_score ?? "-"} คะแนน
-            ทำเมื่อ {formatThaiDate(formData.highest_post_test_date || null)}
-          </Typography>
-        </Box>
+        {[
+          {
+            label: "Pre test",
+            score: formData.pre_test_score,
+            date: formData.pre_test_date,
+          },
+          {
+            label: "Post test",
+            score: formData.post_test_score,
+            date: formData.post_test_date,
+          },
+          {
+            label: "Post test สูงสุด",
+            score: formData.highest_post_test_score,
+            date: formData.highest_post_test_date,
+          },
+        ].map((item, index) => (
+          <Box key={index} mb={1}>
+            <Typography variant="body1">
+              {item.label} : {item.score ?? "-"} คะแนน ทำเมื่อ{" "}
+              {formatThaiDate(item.date || null)}
+            </Typography>
+          </Box>
+        ))}
 
-        <Box fontWeight="bold" mb={1}>
+        {/* <Box fontWeight="bold" mb={1}>
           แบบประเมินความพึงพอใจ
         </Box>
         {formData.satisfaction_survey &&
@@ -261,7 +296,7 @@ const EditUserPopup: React.FC<EditUserPopupProps> = ({
               </Typography>
               <Typography variant="subtitle1">{value}</Typography>
             </Box>
-          ))}
+          ))} */}
       </Box>
 
       {/* เพิ่ม field อื่น ๆ ตามที่ต้องการ */}

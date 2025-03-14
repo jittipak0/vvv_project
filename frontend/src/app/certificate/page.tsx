@@ -24,7 +24,7 @@ export default function CertificatePage() {
   const router = useRouter();
 
   useEffect(() => {
-    if (user?.role != "admin") {
+    if (user?.role == "student") {
       if (user && user.post_test_pass === false) {
         router.push("/review/post-test");
       }

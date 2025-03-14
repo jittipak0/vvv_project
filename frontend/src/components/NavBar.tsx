@@ -7,7 +7,7 @@ import AccordionItem from "./AccordionItem";
 import { useAuth } from "@/hooks/useAuth";
 
 const NavDrawer: React.FC = () => {
-  const { role, logout } = useAuth();
+  const { role, user, logout } = useAuth();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const router = useRouter();
 
@@ -105,7 +105,7 @@ const NavDrawer: React.FC = () => {
                 },
 
                 {
-                  label: "- วิเคราะห์และนำเสนอข้อมูล",
+                  label: "- การวิเคราะห์และการนำเสนอข้อมูล",
                   path: "/review/learning-options",
                 },
                 {
@@ -156,8 +156,15 @@ const NavDrawer: React.FC = () => {
                       path: "/admin/edit-content?labelpage=community-potential",
                     },
                     {
-                      label:
-                        "- การวิเคราะห์ นำเสนอ ระบุและจัดลำดับปัญหาและความต้องการ",
+                      label: "- การวิเคราะห์และการนำเสนอข้อมูล",
+                      path: "/admin/edit-content?labelpage=learning-options",
+                    },
+                    {
+                      label: "- การระบุปัญหาและความต้องการ",
+                      path: "/admin/edit-content?labelpage=learning-options",
+                    },
+                    {
+                      label: "- การจัดลำดับปัญหาและความต้องการ",
                       path: "/admin/edit-content?labelpage=learning-options",
                     },
                   ]}
@@ -274,6 +281,14 @@ const NavDrawer: React.FC = () => {
                 </AccordionItem>
               </AccordionItem>
             )}
+
+            <ListItem>
+              {user?.post_test_pass === true && (
+                <Link href="/certificate" passHref>
+                  ดาวน์โหลดเกียรติบัตร
+                </Link>
+              )}
+            </ListItem>
 
             <ListItem>
               <Link href="/about" passHref>
