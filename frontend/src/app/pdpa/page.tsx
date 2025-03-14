@@ -98,6 +98,7 @@ export default function PDPA() {
             หรือขอให้ลบข้อมูลส่วนบุคคลของคุณตลอดเวลา
             รวมถึงมีสิทธิ์ในการถอนความยินยอมในการใช้ข้อมูลของคุณ
           </Typography>
+          
           <Typography
             variant="body1"
             sx={{ textAlign: "left", marginBottom: "16px" }}
