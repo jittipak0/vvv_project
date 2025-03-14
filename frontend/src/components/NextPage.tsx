@@ -6,22 +6,22 @@ import { FC } from "react";
 interface NextPageProps {
   url: string;
   setProgress?: string;
-  setLearningTitle?: string;
+  // setLearningTitle?: string;
 }
 
 const NextPage: FC<NextPageProps> = ({
   url,
   setProgress,
-  setLearningTitle,
+  // setLearningTitle,
 }) => {
   const trackProgress = useProgressTracking();
   const handleNextPage = () => {
     if (setProgress) {
       trackProgress(setProgress);
     }
-    if (setLearningTitle) {
-      trackProgress(setLearningTitle);
-    }
+    // if (setLearningTitle) {
+    //   trackProgress(setLearningTitle);
+    // }
     window.location.href = url;
   };
 

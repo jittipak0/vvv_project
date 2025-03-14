@@ -124,7 +124,7 @@ export default function CertificatePage() {
       >
         <Box
           component="img"
-          src="/images/certificate.webp"
+          src="/images/certificate.png"
           alt="Certificate Preview"
           style={{ width: "100%", height: "100%" }}
         />
@@ -132,7 +132,7 @@ export default function CertificatePage() {
         <Typography
           sx={{
             position: "absolute",
-            top: "42%",
+            top: "43%",
             left: "50%",
             transform: "translate(-50%, -50%)",
             fontSize: "2.8vmin",
@@ -146,8 +146,8 @@ export default function CertificatePage() {
         <Typography
           sx={{
             position: "absolute",
-            bottom: "28.5%",
-            left: "40%",
+            bottom: "29.7%",
+            left: "37.2%",
             transform: "translateY( -50%)",
             fontSize: "1.4vmin",
             color: "#333",
@@ -160,10 +160,10 @@ export default function CertificatePage() {
         <Typography
           sx={{
             position: "absolute",
-            bottom: "29%",
-            left: "49.4%",
+            bottom: "29.7%",
+            left: "48%",
             transform: "translateY( -50%)",
-            fontSize: "1.25vmin",
+            fontSize: "1.4vmin",
             color: "#333",
             textAlign: "center",
             width: "6.5%",
@@ -174,8 +174,8 @@ export default function CertificatePage() {
         <Typography
           sx={{
             position: "absolute",
-            bottom: "28.5%",
-            left: "59.8%",
+            bottom: "29.7%",
+            left: "58.8%",
             transform: "translateY( -50%)",
             fontSize: "1.4vmin",
             color: "#333",
@@ -199,7 +199,7 @@ export default function CertificatePage() {
       >
         <Box
           component="img"
-          src="/images/certificate.webp"
+          src="/images/certificate.png"
           alt="Certificate High-Res"
           style={{ width: "100%", height: "100%" }}
         />
@@ -207,7 +207,7 @@ export default function CertificatePage() {
           sx={{
             position: "absolute",
             top: "43.2%",
-            left: "50%",
+            left: "49%",
             transform: "translate(-50%, -50%)",
             fontSize: "30px",
             color: "#333",
@@ -220,10 +220,10 @@ export default function CertificatePage() {
         <Typography
           sx={{
             position: "absolute",
-            bottom: "27.2%",
-            left: "39.8%",
+            bottom: "29%",
+            left: "37%",
             transform: "translateY( -50%)",
-            fontSize: "24px",
+            fontSize: "15.5px",
             color: "#333",
             textAlign: "center",
             width: "5%",
@@ -234,10 +234,10 @@ export default function CertificatePage() {
         <Typography
           sx={{
             position: "absolute",
-            bottom: "28.7%",
-            left: "49.4%",
+            bottom: "29%",
+            left: "47.7%",
             transform: "translateY( -50%)",
-            fontSize: "15.5px",
+            fontSize: "15.6px",
             color: "#333",
             textAlign: "center",
             width: "6.5%",
@@ -248,10 +248,10 @@ export default function CertificatePage() {
         <Typography
           sx={{
             position: "absolute",
-            bottom: "27.3%",
-            left: "59.8%",
+            bottom: "29%",
+            left: "58.7%",
             transform: "translateY( -50%)",
-            fontSize: "24px",
+            fontSize: "15.5px",
             color: "#333",
             textAlign: "center",
             width: "7.7%",

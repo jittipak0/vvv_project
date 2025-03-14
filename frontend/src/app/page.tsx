@@ -1,10 +1,10 @@
 "use client";
-import { Box, List, ListItem } from "@mui/material";
+import { Box } from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
 import Tutorial from "@/components/Tutorial";
 import MiniMap from "@/components/MiniMap";
 import { useTutorialTracking } from "@/hooks/tutorialTracking";
-import { useRouter } from "next/navigation";
+import MapItem from "@/components/MapItem";
 
 const listContent = [
   {
@@ -16,6 +16,17 @@ const listContent = [
     elementBoxWidth: 150,
     elementBoxHeight: 150,
     detail: ["จุดเรียนรู้"],
+  },
+  {
+    title: "จุดรถชน",
+    label: " ! ",
+    titleLeft: 685,
+    titleTop: 673,
+    elementBoxLeft: 685,
+    elementBoxTop: 683,
+    elementBoxWidth: 80,
+    elementBoxHeight: 75,
+    detail: ["บริเวณที่เกิดอุบัติเหตุบ่อยครั้ง", "ชนิดของการเกิดอุบัติเหตุ"],
   },
   {
     title: "ร้านค้า",
@@ -299,22 +310,37 @@ const listContent = [
     elementBoxHeight: 72,
     detail: ["ความเชื่อ", "ศูนย์รวมจิตใจ", "กิจกรรมประจำปี"],
   },
+  {
+    title: "การเผา",
+    label: " ! ",
+    titleLeft: 1090,
+    titleTop: 740,
+    elementBoxLeft: 1080,
+    elementBoxTop: 703,
+    elementBoxWidth: 80,
+    elementBoxHeight: 98,
+    detail: [
+      "คุณภาพอากาศ มลพิษ",
+      "PM 2.5",
+      "นโยบายการจัดการจัดการ PM 2.5",
+      "ผลต่อสุขภาพคนในชุมชน",
+    ],
+  },
 ];
 
 export default function HomePage() {
   const tutorialState = "tt1";
   const tutorial = useTutorialTracking(tutorialState);
   const [tutorialClose, setTutorialClose] = useState(false);
+  const [tutorialIndex, setTutorialIndex] = useState(0);
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isTouchDevice, setIsTouchDevice] = useState(true);
 
-  const router = useRouter();
-
   const handleMouseMove = useCallback(
     (event: MouseEvent) => {
       if (!isTouchDevice) {
-        setCursorPosition({ x: event.clientX, y: event.clientY });
+        setCursorPosition({ x: event.pageX, y: event.pageY });
       }
     },
     [isTouchDevice]
@@ -414,6 +440,11 @@ export default function HomePage() {
     };
   };
 
+  // ขนาดไฮไลท์
+  const highlightWidth = 200;
+  const highlightHeight = 230;
+  const highlightSize = calculateSize(highlightWidth, highlightHeight);
+
   return (
     <Box
       sx={{
@@ -426,167 +457,21 @@ export default function HomePage() {
         <MiniMap hideNevIcon img="/images/logo.webp" />
       </Box>
 
-      {listContent.map((content, index) => {
-        const titlePosition = calculatePosition(
-          content.titleTop,
-          content.titleLeft
-        );
-        const contentBoxPosition = calculatePosition(
-          content.elementBoxTop,
-          content.elementBoxLeft
-        );
-        const contentBoxSize = calculateSize(
-          content.elementBoxWidth,
-          content.elementBoxHeight
-        );
-
-        const showContentWidth = 250;
-        const showContentHeight = 250;
-
-        let adjustedLeft, adjustedTop;
-
-        if (!isTouchDevice) {
-          // สำหรับอุปกรณ์ที่มี cursor
-          const { x, y } = cursorPosition;
-          adjustedLeft = x;
-          adjustedTop = y;
-
-          if (y + showContentHeight + 10 < window.innerHeight) {
-            adjustedTop += 10; // แสดงด้านล่าง cursor
-          } else if (y + showContentHeight * 2 + 10 > window.innerHeight) {
-            adjustedTop -= showContentHeight + 10; // แสดงด้านบน cursor
-          }
-          if (x + showContentWidth + 10 < window.innerWidth) {
-            adjustedLeft += 10; // แสดงด้านขวา cursor
-          } else if (x - showContentWidth - 10 > 0) {
-            adjustedLeft -= showContentWidth + 10; // แสดงด้านซ้าย cursor
-          }
-        } else {
-          // สำหรับอุปกรณ์ที่ไม่มี cursor
-          adjustedLeft = parseFloat(titlePosition.left);
-          adjustedTop = parseFloat(titlePosition.top);
-
-          if (cursorPosition.y + showContentHeight + 10 < screenSize.height) {
-            adjustedTop += 10;
-          } else if (
-            cursorPosition.y + showContentHeight * 2 + 10 >
-            screenSize.height
-          ) {
-            adjustedTop -= showContentHeight + 10;
-          }
-
-          if (cursorPosition.x + showContentWidth + 10 < screenSize.width) {
-            adjustedLeft += 10;
-          } else if (
-            cursorPosition.x + showContentWidth * 2 + 10 >
-            screenSize.width
-          ) {
-            adjustedLeft -= showContentWidth + 10;
-          }
-        }
-        const imgWidth = imgSize();
-
-        return (
-          <Box key={index} sx={{ position: "relative" }}>
-            {/* Title */}
-            <Box
-              sx={{
-                bgcolor: "#fff",
-                pl: 0.7,
-                pr: 0.7,
-                borderRadius: "7px",
-                fontSize: `${imgWidth / 90}px`,
-                position: "absolute",
-                display: "flex",
-                minWidth: "fit-content",
-                ...titlePosition,
-              }}
-              onClick={() => {
-                if (content.title === "ศาลากลางบ้าน") {
-                  setShowContent("");
-                  setClicked(false);
-                  router.push("/review/community-hall");
-                } else {
-                  setClicked(!clicked);
-                  if (!clicked) {
-                    setShowContent(content.title);
-                  }
-                }
-              }}
-              onMouseEnter={() => setShowContent(content.title)}
-              onMouseLeave={() => setShowContent("")}
-            >
-              {content.label || content.title}
-            </Box>
-
-            {/* กล่อง Hover */}
-            <Box
-              sx={{
-                position: "absolute",
-                ...contentBoxPosition,
-                ...contentBoxSize,
-              }}
-              onClick={() => {
-                if (content.title === "ศาลากลางบ้าน") {
-                  setShowContent("");
-                  setClicked(false);
-                  router.push("/review/community-hall");
-                } else {
-                  setClicked(!clicked);
-                  if (!clicked) {
-                    setShowContent(content.title);
-                  }
-                }
-              }}
-              onMouseEnter={() => setShowContent(content.title)}
-              onMouseLeave={() => setShowContent("")}
-            />
-
-            {/* Show Content */}
-            {showContent === content.title && (
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: `${adjustedTop}px`,
-                  left: `${adjustedLeft}px`,
-                  bgcolor: "white",
-                  p: 3,
-                  borderRadius: "15px",
-                  boxShadow: "0px 0px 10px rgba(0,0,0,0.2)",
-                  overflow: "hidden",
-                  display: "flex",
-                  flexDirection: "column",
-                  zIndex: 9,
-                }}
-              >
-                <Box
-                  sx={{
-                    // fontSize: "1.5rem",
-                    fontSize: `${imgWidth / 90}px`,
-                    border: "4px solid #f57b1f",
-                    width: "fit-content",
-                    pl: 0.7,
-                    pr: 0.7,
-                    borderRadius: "15px",
-                  }}
-                >
-                  {content.title}
-                </Box>
-                <List>
-                  {content.detail.map((item, index) => (
-                    <ListItem
-                      key={index}
-                      sx={{ fontSize: `${imgWidth / 95}px` }}
-                    >
-                      • {item}
-                    </ListItem>
-                  ))}
-                </List>
-              </Box>
-            )}
-          </Box>
-        );
-      })}
+      {listContent.map((content, index) => (
+        <MapItem
+          key={index}
+          content={content}
+          showContent={showContent}
+          clicked={clicked}
+          isTouchDevice={isTouchDevice}
+          cursorPosition={cursorPosition}
+          calculatePosition={calculatePosition}
+          calculateSize={calculateSize}
+          imgSize={imgSize}
+          setShowContent={setShowContent}
+          setClicked={setClicked}
+        />
+      ))}
 
       <Box
         sx={{
@@ -600,7 +485,22 @@ export default function HomePage() {
 
       {tutorial && !tutorialClose && (
         <Box>
-          <Box sx={{ zIndex: 2 }}>
+          {tutorialIndex === 1 && (
+            <Box
+              sx={{
+                ...highlightSize,
+                left: "50%",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
+                backgroundImage: `url('/images/map2.png')`,
+                backgroundSize: "cover",
+                position: "absolute",
+                zIndex: 9100,
+                borderRadius: "5%",
+              }}
+            />
+          )}
+          <Box>
             <Tutorial
               text={[
                 <>
@@ -652,6 +552,7 @@ export default function HomePage() {
               ]}
               tutorialState={tutorialState}
               onClose={() => setTutorialClose(true)}
+              onIndexChange={(idx) => setTutorialIndex(idx)}
             />
           </Box>
         </Box>

@@ -62,9 +62,24 @@ export default function CommunityHall() {
             width: `${width / 9.5}px`,
             bottom: "25px",
             left: `${width / 3 + 40}px`,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <PopUpContent contents={popupContents} img="pin.png" />
+          <PopUpContent contents={popupContents} learningTitle="CA" />
+          <Box
+            sx={{
+              bgcolor: "var(--color_bg_text_box)",
+              p: "5px",
+              borderRadius: "5px",
+              textAlign: "center",
+              width: "fit-content",
+              fontSize: `clamp(12px, ${width * 0.015}px, 24px)`,
+            }}
+          >
+            การประเมินชุมชน
+          </Box>
         </Box>
       </Box>
 

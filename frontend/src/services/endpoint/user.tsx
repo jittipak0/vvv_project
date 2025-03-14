@@ -11,7 +11,6 @@ export const updateUser = async (
 
 export const getUserByID = async (userId: number): Promise<User> => {
   const response = await apiClient.get(`/users/${userId}`);
-  console.log("response.data", response.data);
   return response.data;
 };
 

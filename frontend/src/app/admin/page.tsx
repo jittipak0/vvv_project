@@ -36,17 +36,51 @@ const TeacherDashboard = () => {
   const [students, setStudents] = useState<User[]>([]);
   const [search, setSearch] = useState("");
   const [filteredStudents, setFilteredStudents] = useState(students);
+  const [admins, setAdmins] = useState<User[]>([]);
+  const [searchAdmin, setSearchAdmin] = useState("");
+  const [filteredAdmins, setFilteredAdmins] = useState(admins);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const { role } = useAuth();
 
   useEffect(() => {
-    const fetchStudents = async () => {
-      const data = await getUserByRole("student");
-      setStudents(data);
-      setFilteredStudents(data);
-    };
-    fetchStudents();
-  }, []);
+    if (role === "admin" || role === "teacher") {
+      const fetchStudents = async () => {
+        try {
+          const data = await getUserByRole("student");
+          setStudents(data);
+          setFilteredStudents(data);
+        } catch (error) {
+          console.error("Error fetching students:", error);
+        }
+      };
+      fetchStudents();
+    }
+
+    if (role === "admin") {
+      const fetchAdmins = async () => {
+        try {
+          const data = await getUserByRole("admin");
+          setAdmins(data);
+          setFilteredAdmins(data);
+        } catch (error) {
+          console.error("Error fetching admins:", error);
+        }
+      };
+
+      const fetchTeacher = async () => {
+        try {
+          const data = await getUserByRole("teacher");
+          setAdmins((prev) => [...prev, ...data]);
+          setFilteredAdmins((prev) => [...prev, ...data]);
+        } catch (error) {
+          console.error("Error fetching teachers:", error);
+        }
+      };
+
+      fetchAdmins();
+      fetchTeacher();
+    }
+  }, [role]);
 
   useEffect(() => {
     setFilteredStudents(
@@ -55,15 +89,23 @@ const TeacherDashboard = () => {
           student.fname.includes(search) ||
           student.lname.includes(search) ||
           student.email.includes(search) ||
-          (student.student_id !== undefined &&
-            student.student_id !== null &&
+          (student.student_id &&
             student.student_id.toString().includes(search)) ||
-          (student.adviser !== undefined &&
-            student.adviser !== null &&
-            student.adviser.toString().includes(search))
+          (student.adviser && student.adviser.toString().includes(search))
       )
     );
   }, [search, students]);
+
+  useEffect(() => {
+    setFilteredAdmins(
+      admins.filter(
+        (admin) =>
+          admin.fname.includes(searchAdmin) ||
+          admin.lname.includes(searchAdmin) ||
+          admin.email.includes(searchAdmin)
+      )
+    );
+  }, [searchAdmin, admins]);
 
   const avgPreTest = Math.round(
     students.reduce((sum, s) => sum + (s.pre_test_score ?? 0), 0) /
@@ -442,6 +484,74 @@ const TeacherDashboard = () => {
             />
           </Box>
         </Paper>
+
+        {role === "admin" && (
+          <Paper sx={{ p: 4 }}>
+            <Box sx={{ fontSize: "1.3rem", mb: 2 }}>ตารางผู้ดูแล</Box>
+            {/*  ช่องค้นหา */}
+            <TextField
+              label="🔍 ค้นหา"
+              variant="outlined"
+              fullWidth
+              onChange={(e) => setSearchAdmin(e.target.value)}
+              sx={{ mb: 2 }}
+            />
+            {/*  ตารางผู้ดูแล */}
+            <Box sx={{ height: 400, width: "100%" }}>
+              <DataGrid
+                rows={filteredAdmins}
+                columns={[
+                  {
+                    field: "id",
+                    headerName: "ลำดับ",
+                    width: 60,
+                    headerAlign: "center",
+                    align: "center",
+                  },
+                  {
+                    field: "role",
+                    headerName: "Role",
+                    minWidth: 100,
+                    flex: 1,
+                  },
+                  {
+                    field: "fname",
+                    headerName: "ชื่อ",
+                    minWidth: 100,
+                    flex: 1,
+                  },
+                  {
+                    field: "lname",
+                    headerName: "นามสกุล",
+                    minWidth: 100,
+                    flex: 1,
+                  },
+                  {
+                    field: "email",
+                    headerName: "อีเมล",
+                    minWidth: 200,
+                    flex: 1,
+                  },
+                  {
+                    field: "edit",
+                    headerName: role == "admin" ? "ดู/แก้ไข" : "รายละเอียด",
+                    width: 100,
+                    headerAlign: "center",
+                    align: "center",
+                    renderCell: (params) => (
+                      <Button
+                        variant="outlined"
+                        onClick={() => setSelectedUser(params.row)}
+                      >
+                        {role == "admin" ? "ดู/แก้ไข" : "ดู"}
+                      </Button>
+                    ),
+                  },
+                ]}
+              />
+            </Box>
+          </Paper>
+        )}
       </Box>
 
       {selectedUser && (
@@ -450,21 +560,79 @@ const TeacherDashboard = () => {
           user={selectedUser}
           onClose={() => setSelectedUser(null)}
           onSave={(updatedUser) => {
-            setStudents((prev) =>
-              prev.map((stu) => (stu.id === updatedUser.id ? updatedUser : stu))
-            );
-            setFilteredStudents((prev) =>
-              prev.map((stu) => (stu.id === updatedUser.id ? updatedUser : stu))
-            );
+            const prevRole = selectedUser.role;
+            const newRole = updatedUser.role;
+            // ตรวจสอบว่ามีการเปลี่ยนแปลง role หรือไม่
+            if (prevRole !== newRole) {
+              // ลบออกจากกลุ่มเดิม
+              if (prevRole === "student") {
+                setStudents((prev) =>
+                  prev.filter((stu) => stu.id !== updatedUser.id)
+                );
+                setFilteredStudents((prev) =>
+                  prev.filter((stu) => stu.id !== updatedUser.id)
+                );
+              } else if (prevRole === "admin" || prevRole === "teacher") {
+                setAdmins((prev) =>
+                  prev.filter((adm) => adm.id !== updatedUser.id)
+                );
+                setFilteredAdmins((prev) =>
+                  prev.filter((adm) => adm.id !== updatedUser.id)
+                );
+              }
+
+              // เพิ่มเข้าไปในกลุ่มใหม่
+              if (newRole === "student") {
+                setStudents((prev) => [...prev, updatedUser]);
+                setFilteredStudents((prev) => [...prev, updatedUser]);
+              } else if (newRole === "admin" || newRole === "teacher") {
+                setAdmins((prev) => [...prev, updatedUser]);
+                setFilteredAdmins((prev) => [...prev, updatedUser]);
+              }
+            } else {
+              if (newRole === "student") {
+                setStudents((prev) =>
+                  prev.map((stu) =>
+                    stu.id === updatedUser.id ? updatedUser : stu
+                  )
+                );
+                setFilteredStudents((prev) =>
+                  prev.map((stu) =>
+                    stu.id === updatedUser.id ? updatedUser : stu
+                  )
+                );
+              } else if (newRole === "admin" || newRole === "teacher") {
+                setAdmins((prev) =>
+                  prev.map((adm) =>
+                    adm.id === updatedUser.id ? updatedUser : adm
+                  )
+                );
+                setFilteredAdmins((prev) =>
+                  prev.map((adm) =>
+                    adm.id === updatedUser.id ? updatedUser : adm
+                  )
+                );
+              }
+            }
             setSelectedUser(null);
           }}
           onDelete={() => {
-            setStudents((prev) =>
-              prev.filter((stu) => stu.id !== selectedUser.id)
-            );
-            setFilteredStudents((prev) =>
-              prev.filter((stu) => stu.id !== selectedUser.id)
-            );
+            const prevRole = selectedUser.role;
+            if (prevRole === "student") {
+              setStudents((prev) =>
+                prev.filter((stu) => stu.id !== selectedUser.id)
+              );
+              setFilteredStudents((prev) =>
+                prev.filter((stu) => stu.id !== selectedUser.id)
+              );
+            } else if (prevRole === "admin" || prevRole === "teacher") {
+              setAdmins((prev) =>
+                prev.filter((adm) => adm.id !== selectedUser.id)
+              );
+              setFilteredAdmins((prev) =>
+                prev.filter((adm) => adm.id !== selectedUser.id)
+              );
+            }
             setSelectedUser(null);
           }}
         />

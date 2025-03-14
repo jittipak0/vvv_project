@@ -22,7 +22,7 @@ interface QuizProps {
 const QuizComponent: FC<QuizProps> = ({
   contents,
   backgroundImage,
-  learningTitle,
+  // learningTitle,
   pageTitle,
   nextPage,
   backPage,
@@ -230,7 +230,7 @@ const QuizComponent: FC<QuizProps> = ({
           <NextPage
             url={nextPage}
             setProgress={pageTitle}
-            setLearningTitle={learningTitle}
+            // setLearningTitle={learningTitle}
           />
         )}
       </Box>

@@ -6,16 +6,24 @@ interface TutorialProps {
   text: ReactNode[];
   tutorialState: string;
   onClose?: () => void;
+  onIndexChange?: (currentIndex: number) => void;
 }
 
-const Tutorial: FC<TutorialProps> = ({ text, tutorialState, onClose }) => {
+const Tutorial: FC<TutorialProps> = ({
+  text,
+  tutorialState,
+  onClose,
+  onIndexChange,
+}) => {
   const [isTutorial, setIsTutorial] = useState(true);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const progressTracking = useProgressTracking();
 
   const handleNextText = () => {
-    if (currentTextIndex < text.length - 1) {
-      setCurrentTextIndex(currentTextIndex + 1);
+    const newIndex = currentTextIndex + 1;
+    if (newIndex < text.length) {
+      setCurrentTextIndex(newIndex);
+      if (onIndexChange) onIndexChange(newIndex);
     } else {
       handleCloseTutorial();
     }
@@ -44,7 +52,7 @@ const Tutorial: FC<TutorialProps> = ({ text, tutorialState, onClose }) => {
             alignItems: "end",
             overflow: "hidden",
             cursor: "grab",
-            zIndex: 9997,
+            zIndex: 9000,
           }}
         >
           <Box
@@ -63,6 +71,7 @@ const Tutorial: FC<TutorialProps> = ({ text, tutorialState, onClose }) => {
               sx={{
                 width: "22vmin",
                 transform: "translateX(25px)",
+                zIndex: 9999,
               }}
             />
             <Box
@@ -100,6 +109,7 @@ const Tutorial: FC<TutorialProps> = ({ text, tutorialState, onClose }) => {
                   fontSize: { sm: "15px", md: "2.5vmin" },
                   maxHeight: "120px",
                   overflowY: "auto",
+                  zIndex: 9998,
                 }}
               >
                 {text[currentTextIndex]}

@@ -1,5 +1,13 @@
 "use client";
-import { Box, TextField, Button, Typography, Paper } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Paper,
+  Checkbox,
+  FormControlLabel,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import "@/styles/globals.css";
 import Link from "next/link";
@@ -17,16 +25,28 @@ export default function SignUp() {
   const [adviser, setAdviser] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [acceptedPDPA, setAcceptedPDPA] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       router.push("/");
     }
+
+    // ตรวจสอบการยอมรับ PDPA จาก localStorage
+    const pdpaAccepted = localStorage.getItem("pdpaAccepted");
+    if (pdpaAccepted === "true") {
+      setAcceptedPDPA(true);
+    }
   }, [router]);
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!acceptedPDPA) {
+      alert("กรุณาอ่านข้อตกลง PDPA ก่อนสมัครสมาชิก");
+      return;
+    }
 
     if (!fname.trim()) {
       alert("กรุณากรอกชื่อจริง");
@@ -85,7 +105,6 @@ export default function SignUp() {
         adviser.trim()
       );
 
-      // ถ้าสำเร็จ (response 201) จะขึ้นข้อความหรือ redirect ไปยังหน้า login
       alert("สมัครสมาชิกสำเร็จ");
       router.push("/login");
     } catch (err) {
@@ -184,7 +203,6 @@ export default function SignUp() {
             value={sec}
             onChange={(e) => {
               const value = e.target.value;
-
               if (
                 /^\d*$/.test(value) &&
                 (value === "" || parseInt(value, 10) <= 999)
@@ -192,9 +210,7 @@ export default function SignUp() {
                 setSec(value === "" ? "" : value);
               }
             }}
-            inputProps={{
-              pattern: "[0-9]*",
-            }}
+            inputProps={{ pattern: "[0-9]*" }}
             sx={{ ml: 2, width: "100px" }}
           />
         </Box>
@@ -225,9 +241,26 @@ export default function SignUp() {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
+
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={acceptedPDPA}
+              onChange={(e) => setAcceptedPDPA(e.target.checked)}
+            />
+          }
+          label={
+            <Typography variant="body2">
+              ฉันยอมรับข้อตกลง PDPA (<Link href="/pdpa">อ่านรายละเอียด</Link>)
+            </Typography>
+          }
+          sx={{ marginTop: "16px" }}
+        />
+
         <Button
           variant="contained"
           onClick={handleSignUp}
+          disabled={!acceptedPDPA}
           sx={{
             marginTop: "24px",
             padding: "8px",

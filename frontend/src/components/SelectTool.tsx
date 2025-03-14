@@ -7,9 +7,11 @@ import BackPage from "./BackPage";
 import NextPage from "./NextPage";
 import { useTutorialTracking } from "@/hooks/tutorialTracking";
 import Tutorial from "./Tutorial";
+import { useAuth } from "@/hooks/useAuth";
 
 interface SelectToolProps {
   title: string;
+  learningTitle: string;
   pageTitle: string;
   progress: number;
   toolPage: string;
@@ -22,6 +24,7 @@ interface SelectToolProps {
 
 const SelectToolComponent: FC<SelectToolProps> = ({
   title,
+  learningTitle,
   pageTitle,
   toolPage,
   titleAssessmentTools,
@@ -41,6 +44,11 @@ const SelectToolComponent: FC<SelectToolProps> = ({
   const tutorialState = "tt6";
   const tutorial = useTutorialTracking(tutorialState);
   const [tutorialClose, setTutorialClose] = useState(false);
+
+  const { user } = useAuth();
+  const hasCompletedRequiredPages =
+    user?.visited_page?.includes(`${learningTitle}T`) &&
+    user?.visited_page?.includes(`${learningTitle}AT`);
 
   return (
     <Box
@@ -176,7 +184,9 @@ const SelectToolComponent: FC<SelectToolProps> = ({
       </Box>
 
       {backPage && <BackPage url={backPage} />}
-      {nextPage && <NextPage url={nextPage} setProgress={pageTitle} />}
+      {hasCompletedRequiredPages && nextPage && (
+        <NextPage url={nextPage} setProgress={pageTitle} />
+      )}
     </Box>
   );
 };

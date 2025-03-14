@@ -23,6 +23,7 @@ export function useProgressTracking() {
       // หน้าที่ไม่ต้องรวมในการคำนวณ progress
       const excludedPages = new Set([
         "tt1",
+        "tt2",
         "tt2.2",
         "tt3",
         "tt4",
@@ -32,6 +33,11 @@ export function useProgressTracking() {
         "tt9",
         "tt9.2",
         "tt10",
+        "HST",
+        "ECST",
+        "PST",
+        "SCST",
+        "EVST",
       ]);
       const VisitedPagesTracking = updatedVisitedPages.filter(
         (p) => !excludedPages.has(p)

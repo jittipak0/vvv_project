@@ -1,7 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import { Box, TextField, Button, Typography, Paper } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Paper,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import { delUserByID, updateUser } from "@/services/endpoint/user";
 import { User } from "@/types/api";
 
@@ -64,6 +72,9 @@ const EditUserPopup: React.FC<EditUserPopupProps> = ({
       if (formData.remark !== user.remark) {
         updateData = { ...updateData, remark: formData.remark };
       }
+      if (formData.role !== user.role) {
+        updateData = { ...updateData, role: formData.role };
+      }
       // ตรวจสอบว่า updateData มีคีย์หรือไม่
       if (Object.keys(updateData).length > 0) {
         const updated = await updateUser(formData.id, updateData);
@@ -121,7 +132,7 @@ const EditUserPopup: React.FC<EditUserPopupProps> = ({
         left: "50%",
         transform: "translate(-50%, -50%)",
         padding: 4,
-        zIndex: 2000,
+        zIndex: 100,
         maxWidth: 600,
         width: "90%",
         maxHeight: "60%",
@@ -151,7 +162,7 @@ const EditUserPopup: React.FC<EditUserPopupProps> = ({
         )}
       </Box>
 
-      {role == "admin" && (
+      {role === "admin" && (
         <Box>
           <TextField
             fullWidth
@@ -177,54 +188,84 @@ const EditUserPopup: React.FC<EditUserPopupProps> = ({
             onChange={handleChange}
             sx={{ mb: 2 }}
           />
+
+          {formData.role === "student" && (
+            <Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  mb: 2,
+                  gap: 2,
+                  justifyContent: "center",
+                }}
+              >
+                <TextField
+                  fullWidth
+                  label="รหัสนักศึกษา"
+                  name="student_id"
+                  value={formData.student_id || ""}
+                  onChange={handleChange}
+                />
+                {"Sec."}
+                <TextField
+                  placeholder="No."
+                  margin="normal"
+                  type="text"
+                  inputMode="numeric"
+                  value={formData.section || null}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    if (
+                      /^\d*$/.test(value) &&
+                      (value === "" || parseInt(value, 10) <= 999)
+                    ) {
+                      setFormData({ ...formData, section: value });
+                    }
+                  }}
+                  inputProps={{
+                    pattern: "[0-9]*",
+                  }}
+                  sx={{ width: "100px" }}
+                />
+              </Box>
+              <TextField
+                fullWidth
+                label="อาจารย์ที่ปรึกษา"
+                name="adviser"
+                value={formData.adviser || ""}
+                onChange={handleChange}
+                sx={{ mb: 2 }}
+              />
+            </Box>
+          )}
+
           <Box
             sx={{
               display: "flex",
-              alignItems: "center",
-              mb: 2,
-              gap: 2,
               justifyContent: "center",
+              alignItems: "center",
+              mt: 2,
+              mb: 2,
             }}
           >
-            <TextField
-              fullWidth
-              label="รหัสนักศึกษา"
-              name="student_id"
-              value={formData.student_id || ""}
-              onChange={handleChange}
-            />
-            {"Sec."}
-            <TextField
-              placeholder="No."
-              margin="normal"
-              type="text"
-              inputMode="numeric"
-              value={formData.section || ""}
+            <Box sx={{ minWidth: "50px" }}>Role</Box>
+            <Select
+              name="role"
+              value={formData.role || "student"}
               onChange={(e) => {
-                const value = e.target.value;
-                if (
-                  /^\d*$/.test(value) &&
-                  (value === "" || parseInt(value, 10) <= 999)
-                ) {
-                  setFormData({ ...formData, section: value });
-                }
+                setFormData({ ...formData, role: e.target.value });
               }}
-              inputProps={{
-                pattern: "[0-9]*",
-              }}
-              sx={{ width: "100px" }}
-            />
+              sx={{ width: "50%", zIndex: 101, position: "relative" }}
+            >
+              <MenuItem value="student">student</MenuItem>
+              <MenuItem value="teacher">teacher</MenuItem>
+              <MenuItem value="admin">admin</MenuItem>
+            </Select>
           </Box>
-          <TextField
-            fullWidth
-            label="อาจารย์ที่ปรึกษา"
-            name="adviser"
-            value={formData.adviser || ""}
-            onChange={handleChange}
-            sx={{ mb: 2 }}
-          />
         </Box>
       )}
+
       {role !== "admin" && (
         <Box>
           {[
@@ -244,48 +285,49 @@ const EditUserPopup: React.FC<EditUserPopupProps> = ({
         </Box>
       )}
 
-      <TextField
-        fullWidth
-        label="หมายเหตุ"
-        name="remark"
-        multiline
-        rows={4}
-        margin="normal"
-        value={formData.remark || ""}
-        onChange={handleChange}
-        sx={{ mb: 2 }}
-      />
+      {formData.role === "student" && (
+        <Box>
+          <TextField
+            fullWidth
+            label="หมายเหตุ"
+            name="remark"
+            multiline
+            rows={4}
+            margin="normal"
+            value={formData.remark || ""}
+            onChange={handleChange}
+            sx={{ mb: 2 }}
+          />
+          <Box>
+            <Box fontWeight="bold" mb={1}>
+              คะแนน
+            </Box>
+            {[
+              {
+                label: "Pre test",
+                score: formData.pre_test_score,
+                date: formData.pre_test_date,
+              },
+              {
+                label: "Post test",
+                score: formData.post_test_score,
+                date: formData.post_test_date,
+              },
+              {
+                label: "Post test สูงสุด",
+                score: formData.highest_post_test_score,
+                date: formData.highest_post_test_date,
+              },
+            ].map((item, index) => (
+              <Box key={index} mb={1}>
+                <Typography variant="body1">
+                  {item.label} : {item.score ?? "-"} คะแนน ทำเมื่อ{" "}
+                  {formatThaiDate(item.date || null)}
+                </Typography>
+              </Box>
+            ))}
 
-      <Box>
-        <Box fontWeight="bold" mb={1}>
-          คะแนน
-        </Box>
-        {[
-          {
-            label: "Pre test",
-            score: formData.pre_test_score,
-            date: formData.pre_test_date,
-          },
-          {
-            label: "Post test",
-            score: formData.post_test_score,
-            date: formData.post_test_date,
-          },
-          {
-            label: "Post test สูงสุด",
-            score: formData.highest_post_test_score,
-            date: formData.highest_post_test_date,
-          },
-        ].map((item, index) => (
-          <Box key={index} mb={1}>
-            <Typography variant="body1">
-              {item.label} : {item.score ?? "-"} คะแนน ทำเมื่อ{" "}
-              {formatThaiDate(item.date || null)}
-            </Typography>
-          </Box>
-        ))}
-
-        {/* <Box fontWeight="bold" mb={1}>
+            {/* <Box fontWeight="bold" mb={1}>
           แบบประเมินความพึงพอใจ
         </Box>
         {formData.satisfaction_survey &&
@@ -297,7 +339,9 @@ const EditUserPopup: React.FC<EditUserPopupProps> = ({
               <Typography variant="subtitle1">{value}</Typography>
             </Box>
           ))} */}
-      </Box>
+          </Box>
+        </Box>
+      )}
 
       {/* เพิ่ม field อื่น ๆ ตามที่ต้องการ */}
       <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>

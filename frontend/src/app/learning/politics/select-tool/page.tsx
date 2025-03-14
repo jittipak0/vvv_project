@@ -11,6 +11,7 @@ export default function SelectTool() {
     <Box>
       <SelectToolComponent
         title="ด้านการเมืองการปกครอง"
+        learningTitle="P"
         pageTitle="PST"
         progress={user?.total_progress ?? 0}
         titleAssessmentTools="เก็บข้อมูลศักยภาพด้านการเมืองการปกครอง"

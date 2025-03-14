@@ -17,6 +17,7 @@ export default function HealthForum() {
     <Box>
       <Forum
         title="ด้านสิ่งแวดล้อม"
+        learningTitle="EV"
         pageTitle="EVF"
         progress={user?.total_progress ?? 0}
         contents={pageData}

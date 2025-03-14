@@ -11,6 +11,7 @@ export default function SelectTool() {
     <Box>
       <SelectToolComponent
         title="ด้านสุขภาพ"
+        learningTitle="H"
         pageTitle="HST"
         progress={user?.total_progress ?? 0}
         titleAssessmentTools="เก็บข้อมูลศักยภาพด้านสุขภาพ"

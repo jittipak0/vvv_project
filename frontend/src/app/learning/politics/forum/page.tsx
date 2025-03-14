@@ -17,6 +17,7 @@ export default function HealthForum() {
     <Box>
       <Forum
         title="ด้านการเมืองการปกครอง"
+        learningTitle="P"
         pageTitle="PF"
         progress={user?.total_progress ?? 0}
         contents={pageData}

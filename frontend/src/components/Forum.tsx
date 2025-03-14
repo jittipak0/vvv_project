@@ -8,9 +8,11 @@ import NextPage from "./NextPage";
 import { Page } from "@/types/api";
 import ContentRenderer from "./ContentRenderer";
 import useScrollToMiddle from "@/hooks/useScrollToMiddle";
+import { useAuth } from "@/hooks/useAuth";
 
 interface ForumProps {
   title: string;
+  learningTitle: string;
   pageTitle: string;
   progress: number;
   contents: Page | null;
@@ -23,6 +25,7 @@ interface ForumProps {
 
 const ForumComponent: FC<ForumProps> = ({
   title,
+  learningTitle,
   pageTitle,
   contents,
   dialog,
@@ -32,6 +35,7 @@ const ForumComponent: FC<ForumProps> = ({
   backPage,
 }) => {
   // const tutorialState = "tt5";
+  const { user } = useAuth();
   useScrollToMiddle(50, 100);
   return (
     <Box
@@ -198,7 +202,9 @@ const ForumComponent: FC<ForumProps> = ({
         </Box>
       </Box>
 
-      {backPage && <BackPage url={backPage} />}
+      {user?.visited_page?.includes(learningTitle) && backPage && (
+        <BackPage url={backPage} />
+      )}
       {nextPage && <NextPage url={nextPage} setProgress={pageTitle} />}
     </Box>
   );
